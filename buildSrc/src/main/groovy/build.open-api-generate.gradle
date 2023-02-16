@@ -1,0 +1,54 @@
+plugins {
+    id "org.openapi.generator"
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir "${projectDir}/src/generated/java"
+        }
+    }
+}
+
+project.afterEvaluate {
+    task generate(type: org.openapitools.generate.gradle.plugin.tasks.GenerateTask) {
+        outputs.upToDateWhen { false }
+        skipValidateSpec = true
+        generatorName = "java"
+        inputSpec = "${projectDir}/src/main/openapi/${project.ext.specfile}"
+        outputDir = "${buildDir}/generated"
+        apiPackage = "${project.ext.apiPackage}"
+        invokePackage = "${project.ext.invokePackage}"
+        modelPackage = "${project.ext.modelPackage}"
+        configOptions = [
+                dateLibrary: "java8",
+        ]
+         globalProperties = [
+                 modelDocs : "false",
+                 modelTests : "false",
+                 apiDocs : "false",
+                 apiTests : "false",
+         ]
+
+        doLast {
+            copy {
+                from("${buildDir}/generated/src/main/java") {
+                    include '**/*.*'
+                }
+                into "${projectDir}/src/generated/java"
+           }
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
+    implementation 'io.gsonfire:gson-fire:1.8.5'
+    implementation 'io.swagger:swagger-annotations:1.6.4'
+    implementation 'javax.annotation:javax.annotation-api:1.3.2'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.2'
+    implementation 'com.google.code.findbugs:jsr305:3.0.2'
+
+}

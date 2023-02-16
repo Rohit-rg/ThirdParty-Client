@@ -1,0 +1,13 @@
+plugins {
+    id 'build.open-api-generate'
+}
+
+description = 'Weather API client'
+
+ext {
+    specFile = 'openapi-weather-spec.json'
+    apiPackage = 'com.weather.api.client'
+    invokePackage = 'com.weather.api.client.internal'
+    modelPackage = 'com.weather.api.model'
+}
+

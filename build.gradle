@@ -1,0 +1,26 @@
+plugins {
+    id 'idea'
+}
+
+allprojects {
+    apply plugin: "idea"
+    group = "com.weather"
+    version = "1.0.0"
+}
+
+subprojects {
+    apply plugin: "base"
+
+    tasks.withType(JavaCompile) {
+        build.dependsOn 'generate'
+    }
+    tasks.withType(Javadoc) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+    }
+
+    clean.doFirst {
+        file("${projectDir}/src/generated/java").deleteDir()
+    }
+}
+
+

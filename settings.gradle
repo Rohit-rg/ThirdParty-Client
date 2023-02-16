@@ -1,0 +1,3 @@
+rootProject.name = 'ThirdParty-Client'
+include 'weather-client'
+

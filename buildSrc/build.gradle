@@ -1,0 +1,13 @@
+plugins {
+    id 'groovy-gradle-plugin'
+}
+
+repositories {
+    mavenCentral()
+    gradlePluginPortal()
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation "org.openapi.generator:org.openapi.generator.gradle.plugin:5.1.1"
+}
