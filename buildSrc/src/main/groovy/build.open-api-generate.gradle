@@ -10,8 +10,13 @@ sourceSets {
     }
 }
 
+repositories {
+    mavenCentral()
+    gradlePluginPortal()
+}
+
 project.afterEvaluate {
-    task generate(type: org.openapitools.generate.gradle.plugin.tasks.GenerateTask) {
+    task generate(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
         outputs.upToDateWhen { false }
         skipValidateSpec = true
         generatorName = "java"

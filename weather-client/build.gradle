@@ -1,11 +1,20 @@
 plugins {
-    id 'build.open-api-generate'
+    id "java"
+    id "build.open-api-generate"
 }
 
 description = 'Weather API client'
 
+sourceSets {
+    main {
+        java {
+            srcDir "${projectDir}/src/generated/java"
+        }
+    }
+}
+
 ext {
-    specFile = 'openapi-weather-spec.json'
+    specfile = 'openapi-weather-spec.json'
     apiPackage = 'com.weather.api.client'
     invokePackage = 'com.weather.api.client.internal'
     modelPackage = 'com.weather.api.model'
